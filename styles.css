@@ -1,0 +1,385 @@
+@import "@planningcenter/tapestry/tapestry-reset.css";
+@import "@planningcenter/tapestry/tokens.css";
+
+:root {
+  --color-background: var(--t-surface-color-canvas);
+  --color-background-secondary: var(--t-surface-color-card);
+  --color-foreground: var(--t-text-color-headline);
+  --color-foreground-secondary: var(--t-text-color-secondary);
+  --color-foreground-tertiary: var(--t-text-color-disabled);
+  --color-separator: var(--t-border-color);
+  --color-separator-secondary: var(--t-border-color-dark);
+  --color-primary: var(--t-text-color-status-info);
+  --color-success: var(--t-text-color-status-success);
+  --color-error: var(--t-text-color-status-error);
+  --color-warning: var(--t-text-color-status-warning);
+
+  --font-mono: var(--t-font-monospace);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  text-box: trim-both cap alphabetic;
+}
+
+html {
+  color: var(--color-foreground);
+  font-size: var(--t-font-size-md);
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(
+      ellipse at 25% 40%,
+      rgba(180, 163, 248, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 75% 60%,
+      rgba(114, 179, 244, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+      var(--color-background);
+  background-size:
+    100% 100%,
+    100% 100%,
+    30px 30px;
+
+  height: 100dvh;
+  timeline-scope: --stage;
+}
+
+/* ── Stage & slides ───────────────────────────── */
+
+.stage {
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-timeline: --stage block;
+}
+
+section {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--t-spacing-4);
+  height: 100dvh;
+  justify-content: center;
+  padding: var(--t-spacing-7);
+  scroll-snap-align: start;
+}
+
+
+section.center {
+  align-items: center;
+  text-align: center;
+}
+
+em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+/* ── Shared text styles ───────────────────────── */
+
+.label {
+  color: var(--color-foreground-tertiary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.label-primary {
+  color: var(--color-primary);
+}
+
+.label-violet {
+  color: #b4a3f8;
+}
+
+.label-error {
+  color: var(--color-error);
+}
+
+.label-success {
+  color: var(--color-success);
+}
+
+h1 {
+  font-size: clamp(52px, 8vw, 104px);
+  font-weight: var(--t-font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(36px, 5.5vw, 60px);
+  font-weight: var(--t-font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  color: var(--color-foreground-secondary);
+  font-size: clamp(var(--t-font-size-xl), 2.2vw, var(--t-font-size-2xl));
+  font-weight: var(--t-font-weight-normal);
+}
+
+code {
+  background: var(--t-fill-color-status-info-ghost);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  color: var(--color-primary);
+  font-size: 0.9em;
+  font-style: normal;
+  padding: var(--t-spacing-1);
+}
+
+ul,
+ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--t-spacing-2);
+}
+
+li {
+  font-size: clamp(1rem, 1.8vw, var(--t-font-size-lg));
+}
+
+/* ── Problem list ─────────────────────────────── */
+
+.prob-list {
+  list-style: "✕ ";
+}
+
+.prob-list li::marker {
+  color: var(--color-error);
+  font-family: var(--font-mono);
+}
+
+/* ── Check list ──────────────────────────────── */
+
+.check-list {
+  list-style: "✓ ";
+}
+
+.check-list li::marker {
+  color: var(--color-success);
+  font-family: var(--font-mono);
+}
+
+/* ── Feature grid ─────────────────────────────── */
+
+.grid2 {
+  display: grid;
+  gap: var(--t-spacing-1-half);
+  grid-template-columns: 1fr 1fr;
+}
+
+.card {
+  background: var(--color-background-secondary);
+  border: var(--t-border-width) solid var(--color-separator);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  display: flex;
+  flex-direction: column;
+  gap: var(--t-spacing-2);
+  padding: var(--t-spacing-3);
+}
+
+.card-text {
+  color: var(--color-foreground-secondary);
+}
+
+/* ── Steps ────────────────────────────────────── */
+
+.steps li::marker {
+  color: var(--color-warning);
+  font-family: var(--font-mono);
+}
+
+.arrow-list {
+  list-style: "↑ ";
+}
+
+.tag {
+  background: var(--t-fill-color-status-info-ghost);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  color: var(--color-primary);
+  display: inline-block;
+  font-family: var(--font-mono);
+  margin-left: var(--t-spacing-1);
+  padding: var(--t-spacing-1);
+}
+
+/* ── Code block ───────────────────────────────── */
+
+.codeblock {
+  background: var(--color-background-secondary);
+  border: var(--t-border-width) solid var(--color-separator-secondary);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  font-family: var(--font-mono);
+  line-height: 1.45;
+  padding: var(--t-spacing-3);
+  text-box: normal;
+  white-space: pre;
+}
+
+.cm {
+  color: var(--color-foreground-tertiary);
+}
+
+.kw {
+  color: #b4a3f8;
+}
+
+.fn {
+  color: var(--color-warning);
+}
+
+.st {
+  color: var(--color-success);
+}
+
+.br {
+  color: var(--color-primary);
+}
+
+.card-before {
+  border-color: rgba(242, 124, 124, 0.3);
+}
+
+.card-after {
+  border-color: rgba(114, 179, 244, 0.3);
+}
+
+.card-mono {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  gap: var(--t-spacing-1);
+  list-style: none;
+}
+
+/* ── Card row ────────────────────────────────── */
+
+.card-row {
+  display: flex;
+  gap: var(--t-spacing-1-half);
+  width: 100%;
+}
+
+.card-row > .card {
+  flex: 1;
+}
+
+.card-accent {
+  border-color: rgba(180, 163, 248, 0.3);
+}
+
+/* ── Payoff ───────────────────────────────────── */
+
+.big-num {
+  color: var(--color-success);
+  font-size: clamp(90px, 18vw, 176px);
+  font-weight: var(--t-font-weight-bold);
+  letter-spacing: -0.05em;
+}
+
+.big-label {
+  color: var(--color-foreground-secondary);
+  font-size: var(--t-font-size-xl);
+}
+
+.cmd {
+  background: var(--color-background-secondary);
+  border: var(--t-border-width) solid var(--color-separator-secondary);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.8vw, var(--t-font-size-lg));
+  padding: var(--t-spacing-3);
+}
+
+.cmd::before {
+  color: var(--color-success);
+  content: "$ ";
+}
+
+/* ── Headshot ────────────────────────────────── */
+
+.headshot {
+  border-radius: 50%;
+  corner-shape: squircle;
+  height: var(--t-avatar-size-112);
+  object-fit: cover;
+  width: var(--t-avatar-size-112);
+}
+
+/* ── Contact ─────────────────────────────────── */
+
+.contact {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--t-spacing-2);
+  margin-top: var(--t-spacing-1);
+}
+
+.contact-text {
+  color: var(--color-foreground-secondary);
+  font-family: var(--font-mono);
+}
+
+.contact-link {
+  background: var(--t-fill-color-status-info-ghost);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  padding: var(--t-spacing-1);
+}
+
+/* ── Progress bar (scroll-driven) ────────────── */
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.progress-bar {
+  animation: progress linear;
+  animation-timeline: --stage;
+  background: var(--color-primary);
+  height: 4px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transform-origin: left;
+  width: 100%;
+  z-index: calc(infinity);
+}
+
+/* ── Slide counter ───────────────────────────── */
+
+.slide-counter {
+  color: var(--color-foreground-tertiary);
+  font-family: var(--font-mono);
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  z-index: calc(infinity);
+}

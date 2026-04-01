@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en" data-color-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sweetest Alert — A &lt;dialog&gt; Migration Story</title>
+  </head>
+
+  <body>
+    <main class="stage" id="stage">
+      <section class="center">
+        <img class="headshot" src="./headshot.png" alt="Marino" />
+        <h2>Dan Marino</h2>
+        <p class="card-text">UX Engineer • Trust & Safety</p>
+      </section>
+
+      <section class="center">
+        <div class="label">Planning Center</div>
+        <h1>The <em>Sweetest</em> Alert</h1>
+        <h3>A <code>&lt;dialog&gt;</code> Migration Story</h3>
+      </section>
+
+      <section>
+        <div class="label">The Problem</div>
+        <h2>SweetAlert has to go.</h2>
+        <ul class="prob-list">
+          <li>Bloated bundle — too much for what we needed</li>
+          <li>Constant overrides and per-app customization</li>
+          <li>Inconsistent implementations across PCO apps</li>
+          <li>
+            While accessible, it's not using modern JS APIs that are
+            well-supported
+          </li>
+          <li>
+            Questionable ethics — NSFW sponsors, playing Ukraine's national
+            anthem on Russian IP addresses
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="label">The Browser's Gift</div>
+        <h2>The browser already <em>solved</em> this.</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="label label-primary">Focus trapping</div>
+            <p class="card-text">
+              Built-in — no library or manual event management needed.
+            </p>
+          </div>
+          <div class="card">
+            <div class="label label-primary">Keyboard support</div>
+            <p class="card-text">
+              Escape to close, tab order — all handled natively.
+            </p>
+          </div>
+          <div class="card">
+            <div class="label label-primary">::backdrop</div>
+            <p class="card-text">
+              Native overlay — no extra DOM, no z-index battles.
+            </p>
+          </div>
+          <div class="card">
+            <div class="label label-primary">top-layer promotion</div>
+            <p class="card-text">
+              Dialogs always render above everything. Stacking context is
+              someone else's problem now.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">What We Built</div>
+        <h2><em>Sweetest</em> Alert</h2>
+        <ul class="check-list">
+          <li>Native <code>&lt;dialog&gt;</code> — way less code</li>
+          <li>
+            <strong>Built for PCO</strong> — Tapestry tokens, our standards
+          </li>
+          <li>Rails support via <strong>Stimulus</strong> + DOMPurify</li>
+        </ul>
+        <!-- prettier-ignore -->
+        <div class="grid2">
+          <div>
+            <div class="label label-error">Before</div>
+            <div class="codeblock"><span class="cm">// SweetAlert2</span>
+<span class="fn">Swal</span>.<span class="kw">fire</span>({
+  title: <span class="st">"Archive group?"</span>,
+  icon: <span class="st">"warning"</span>,
+  showCancelButton: <span class="br">true</span>,
+  confirmButtonColor: <span class="st">"#3085d6"</span>,
+  confirmButtonText: <span class="st">"Archive"</span>,
+})</div>
+          </div>
+
+          <div>
+            <div class="label label-success">After</div>
+            <div class="codeblock"><span class="cm">// SweetestAlert</span>
+<span class="fn">SweetestAlert</span>({
+  title: <span class="st">"Archive group?"</span>,
+  icon: <span class="st">"warning"</span>,
+  confirmButtonText: <span class="st">"Archive"</span>,
+})</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">The Strategy</div>
+        <h2>Keep it <em>simple.</em> Ship it early.</h2>
+        <div class="card-row">
+          <div class="card card-before">
+            <div class="label label-error">The temptation</div>
+            <ul class="card-text card-mono">
+              <li>Big rewrite</li>
+              <li>Migration plan doc</li>
+              <li>All or nothing</li>
+            </ul>
+          </div>
+
+          <div class="card card-after">
+            <div class="label label-primary">Our approach</div>
+            <ul class="card-text card-mono">
+              <li>Inventory → POC</li>
+              <li>2–3 instances at a time</li>
+              <li>Expand as we go</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="label">How It Happened</div>
+        <h2>The <em>process</em></h2>
+        <ol class="steps">
+          <li><strong>Inventory</strong> — every swal instance in Accounts</li>
+          <li><strong>Compare</strong> against the Figma spec</li>
+          <li>
+            <strong>POC</strong> in one low-traffic area
+            <span class="tag">accounts#4080</span>
+          </li>
+          <li>
+            <strong>Convert 2–3 at a time,</strong> growing in visibility and
+            complexity
+          </li>
+          <li>Expand features and tests as each wave reveals new needs</li>
+        </ol>
+      </section>
+
+      <section>
+        <div class="label">Packaging &amp; Rails Support</div>
+        <h2>Extract. Support. <em>Ship.</em></h2>
+        <ul class="steps arrow-list">
+          <li>
+            Extract to an <strong>NPM package</strong> with docs &amp; demos
+          </li>
+          <li>Switch Accounts over to the package</li>
+          <li>
+            Rails: <code>data-*</code> attrs forwarded to the React component
+            via Stimulus + a helper
+          </li>
+        </ul>
+        <!-- prettier-ignore -->
+        <div class="codeblock"><span class="cm"># app/helpers/sweetest_alert_helper.rb</span>
+<span class="kw">def</span> <span class="fn">sweetest_alert_tag</span>(<span class="br">**opts</span>)
+  tag.<span class="fn">div</span>(<span class="st">data:</span> { <span class="st">controller:</span> <span class="st">"sweetest-alert"</span>, **opts })
+<span class="kw">end</span></div>
+      </section>
+
+      <section>
+        <div class="label">AI as Dev Partner</div>
+        <h2>Dogfooding the tools we <em>reach for.</em></h2>
+        <div class="card-row">
+          <div class="card">
+            <div class="label label-violet">Building</div>
+            <p class="card-text">
+              Claude Code to build the component and write tests from day one
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="label label-violet">Docs &amp; demos</div>
+            <p class="card-text">
+              Claude to generate demos and docs for the NPM package
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="label label-violet">Dev tooling</div>
+            <p class="card-text">
+              AI-assisted scripts to accelerate the migration across apps
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="label label-violet">These slides</div>
+            <p class="card-text">Yes, including this deck 😘</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="center">
+        <div class="label">The Payoff</div>
+        <div class="big-num">0</div>
+        <p class="big-label">SweetAlert instances remaining</p>
+        <div class="cmd">yarn remove sweetalert2</div>
+      </section>
+
+      <section class="center">
+        <div class="label">fin.</div>
+        <h1>Thanks<em>!</em></h1>
+        <div class="contact">
+          <span class="contact-text">@marino on Slack</span>
+          <span class="contact-link"
+            >github.com/planningcenter/sweetest-alert</span
+          >
+        </div>
+      </section>
+    </main>
+
+    <div class="progress-bar"></div>
+    <div class="slide-counter" id="ctr">1 / 11</div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
