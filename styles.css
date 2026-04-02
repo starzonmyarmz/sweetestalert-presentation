@@ -244,11 +244,53 @@ ol {
 
 /* ── Grid ────────────────────────────────────── */
 
+@property --fade-left {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --fade-right {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes grid-fade {
+  0% {
+    --fade-left: 0;
+    --fade-right: 3rem;
+  }
+  10% {
+    --fade-left: 3rem;
+    --fade-right: 3rem;
+  }
+  90% {
+    --fade-left: 3rem;
+    --fade-right: 3rem;
+  }
+  100% {
+    --fade-left: 3rem;
+    --fade-right: 0;
+  }
+}
+
 .grid {
+  animation: grid-fade linear;
+  animation-timeline: scroll(self inline);
   display: grid;
   gap: clamp(0.5rem, calc(0.5rem + 2vw), 1.25rem);
   grid-template-columns: repeat(2, 1fr);
-  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black var(--fade-left),
+    black calc(100% - var(--fade-right)),
+    transparent
+  );
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 /* ── Metrics ─────────────────────────────────── */
@@ -298,7 +340,7 @@ ol {
   border-radius: var(--t-border-radius-xl);
   corner-shape: squircle;
   font-family: var(--font-mono);
-  font-size: clamp(0.8rem, calc(0.8rem + 0.5vw), 1.5em);
+  font-size: clamp(0.8rem, calc(0.8rem + 0.5vw), 0.8em);
   line-height: 1.35;
   padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
   text-box: normal;
@@ -336,11 +378,34 @@ ol {
 
 /* ── Payoff slide ────────────────────────────── */
 
+@property --countdown {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 64;
+}
+
+@keyframes countdown {
+  from {
+    --countdown: 64;
+  }
+  to {
+    --countdown: 0;
+  }
+}
+
 .big-num {
+  animation: countdown steps(64) forwards;
+  animation-range: calc(10 / 12 * 100%) calc(11 / 12 * 100%);
+  animation-timeline: --stage;
   color: var(--color-success);
+  counter-reset: num var(--countdown);
   font-size: clamp(5.625rem, calc(1rem + 17vw), 11rem);
   font-weight: var(--t-font-weight-bold);
   letter-spacing: -0.05em;
+}
+
+.big-num::after {
+  content: counter(num);
 }
 
 .big-label {
@@ -400,55 +465,60 @@ ol {
 /* ── Packaging slide (browser bleed) ─────────── */
 
 .packaging-slide {
-  align-items: center;
-  display: grid;
-  gap: clamp(1rem, calc(0.5rem + 2vw), 2.5rem);
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
+  overflow: clip;
+  padding-right: 50%;
   position: relative;
 }
 
-.packaging-content {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, calc(0.5rem + 1.5vw), 2rem);
-}
-
 .browser-chrome {
-  background: var(--color-background-secondary);
-  border: var(--t-border-width) solid var(--color-separator);
+  background: #f0f0f0;
+  border: 1px solid #d1d1d1;
   border-bottom: none;
-  border-radius: 12px 0 0 0;
+  border-radius: 24px 0 0 0;
   border-right: none;
-  bottom: 0;
+  corner-shape: squircle;
   box-shadow: -4px -4px 24px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  overflow: clip;
   position: absolute;
-  right: 0;
-  width: 52%;
+  right: -25%;
+  top: 20%;
+  width: 75%;
 }
 
 .browser-bar {
   align-items: center;
-  border-bottom: var(--t-border-width) solid var(--color-separator);
+  background: #dedede;
+  border-bottom: 1px solid #c8c8c8;
   display: flex;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 8px 16px;
 }
 
 .browser-dot {
-  background: var(--color-separator-secondary);
   border-radius: 50%;
   height: 10px;
   width: 10px;
 }
 
+.browser-dot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.browser-dot:nth-child(2) {
+  background: #febc2e;
+}
+
+.browser-dot:nth-child(3) {
+  background: #28c840;
+}
+
 .browser-url {
-  background: var(--color-background);
-  border: var(--t-border-width) solid var(--color-separator);
+  background: #ffffff;
+  border: 1px solid #c8c8c8;
   border-radius: var(--t-border-radius-lg);
-  color: var(--color-foreground-tertiary);
+  color: #6b6b6b;
   corner-shape: squircle;
   font-family: var(--font-mono);
   font-size: var(--t-font-size-sm);
