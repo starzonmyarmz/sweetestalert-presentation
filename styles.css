@@ -1,4 +1,3 @@
-@import "@planningcenter/tapestry/tapestry-reset.css";
 @import "@planningcenter/tapestry/tokens.css";
 
 :root {
@@ -17,21 +16,16 @@
   --font-mono: var(--t-font-monospace);
 }
 
+/* ── Reset & base ────────────────────────────── */
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  text-box: trim-both cap alphabetic;
 }
 
 html {
-  color: var(--color-foreground);
-  height: 100dvh;
-  overflow: hidden;
-}
-
-body {
   background:
     radial-gradient(
       ellipse at 25% 40%,
@@ -49,31 +43,46 @@ body {
     100% 100%,
     100% 100%,
     30px 30px;
-  font-size: var(--t-font-size-lg);
+  color: var(--color-foreground);
+  font-family: var(--t-font-sans-serif);
+  font-size: clamp(1em, calc(16px + 1vw), 1.5em);
+  height: 100dvh;
+  interpolate-size: allow-keywords;
+  line-height: 1.15;
+  overflow: hidden;
+  text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
   height: 100dvh;
   timeline-scope: --stage;
 }
 
-/* ── Stage & slides ───────────────────────────── */
+/* ── Stage & slides ──────────────────────────── */
 
-.stage {
+main {
   height: 100dvh;
   overflow-y: auto;
   overscroll-behavior: none;
-  scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
   scroll-timeline: --stage block;
+  scrollbar-width: thin;
 }
 
 section {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  gap: var(--t-spacing-4);
+  gap: clamp(1rem, calc(1rem + 2vw), 2rem);
   height: 100dvh;
   justify-content: center;
-  padding: var(--t-spacing-7);
+  overflow: hidden;
+  padding-inline: clamp(2rem, calc(1rem + 3vw), 5rem);
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 section.center {
@@ -81,27 +90,75 @@ section.center {
   text-align: center;
 }
 
+/* ── Typography ──────────────────────────────── */
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--t-font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-box: trim-both cap alphabetic;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(4rem, calc(1rem + 8vw), 8rem);
+}
+
+h2 {
+  font-size: clamp(3rem, calc(1rem + 6vw), 6rem);
+}
+
+h3 {
+  color: var(--color-foreground-secondary);
+  font-size: clamp(2rem, calc(1rem + 1.2vw), 4rem);
+  font-weight: var(--t-font-weight-normal);
+}
+
+p {
+  text-wrap: pretty;
+}
+
 em {
   color: var(--color-primary);
   font-style: normal;
 }
 
-/* ── Shared text styles ───────────────────────── */
+code,
+pre {
+  font-family: var(--t-font-monospace);
+}
+
+code {
+  background: var(--t-fill-color-status-info-ghost);
+  border-radius: var(--t-border-radius-xl);
+  color: var(--color-primary);
+  corner-shape: squircle;
+  font-size: 0.9em;
+  font-style: normal;
+  padding: var(--t-spacing-1);
+}
+
+/* ── Labels ──────────────────────────────────── */
 
 .label {
-  color: var(--color-foreground-tertiary);
+  color: var(--color-foreground-secondary);
   font-family: var(--font-mono);
-  letter-spacing: 0.1em;
-  margin-bottom: var(--t-spacing-2);
+  letter-spacing: 0.05em;
+  margin-bottom: clamp(0.25rem, calc(1rem + 0.5vw), 0.75rem);
   text-transform: uppercase;
 }
 
 .label-primary {
   color: var(--color-primary);
-}
-
-.label-violet {
-  color: #b4a3f8;
 }
 
 .label-error {
@@ -112,88 +169,37 @@ em {
   color: var(--color-success);
 }
 
-h1 {
-  font-size: clamp(52px, 8vw, 104px);
-  font-weight: var(--t-font-weight-bold);
-  letter-spacing: -0.03em;
-}
-
-h2 {
-  font-size: clamp(36px, 5.5vw, 60px);
-  font-weight: var(--t-font-weight-bold);
-  letter-spacing: -0.02em;
-}
-
-h3 {
-  color: var(--color-foreground-secondary);
-  font-size: clamp(var(--t-font-size-xl), 2.2vw, var(--t-font-size-2xl));
-  font-weight: var(--t-font-weight-normal);
-}
-
-code {
-  background: var(--t-fill-color-status-info-ghost);
-  border-radius: var(--t-border-radius-xl);
-  corner-shape: squircle;
-  color: var(--color-primary);
-  font-size: 0.9em;
-  font-style: normal;
-  padding: var(--t-spacing-1);
-}
+/* ── Lists ───────────────────────────────────── */
 
 ul,
 ol {
   display: flex;
   flex-direction: column;
   gap: var(--t-spacing-2);
+  margin-left: 2ch;
 }
 
-li {
-  font-size: clamp(1rem, 1.8vw, var(--t-font-size-lg));
+ol {
+  margin-left: 3ch;
 }
-
-/* ── Problem list ─────────────────────────────── */
 
 .prob-list {
   list-style: "✕ ";
-}
 
-.prob-list li::marker {
-  color: var(--color-error);
-  font-family: var(--font-mono);
+  li::marker {
+    color: var(--color-error);
+    font-family: var(--font-mono);
+  }
 }
-
-/* ── Check list ──────────────────────────────── */
 
 .check-list {
   list-style: "✓ ";
+
+  li::marker {
+    color: var(--color-success);
+    font-family: var(--font-mono);
+  }
 }
-
-.check-list li::marker {
-  color: var(--color-success);
-  font-family: var(--font-mono);
-}
-
-/* ── Feature grid ─────────────────────────────── */
-
-.grid2 {
-  display: grid;
-  gap: var(--t-spacing-1-half);
-  grid-template-columns: 1fr 1fr;
-}
-
-.card {
-  background: var(--color-background-secondary);
-  border: var(--t-border-width) solid var(--color-separator);
-  border-radius: var(--t-border-radius-xl);
-  corner-shape: squircle;
-  padding: var(--t-spacing-3);
-}
-
-.card-text {
-  color: var(--color-foreground-secondary);
-}
-
-/* ── Steps ────────────────────────────────────── */
 
 .steps li::marker {
   color: var(--color-warning);
@@ -204,57 +210,28 @@ li {
   list-style: "↑ ";
 }
 
-.tag {
-  background: var(--t-fill-color-status-info-ghost);
-  border-radius: var(--t-border-radius-xl);
-  corner-shape: squircle;
-  color: var(--color-primary);
-  display: inline-block;
-  font-family: var(--font-mono);
-  margin-left: var(--t-spacing-1);
-  padding: var(--t-spacing-1);
-}
+/* ── Cards ───────────────────────────────────── */
 
-/* ── Code block ───────────────────────────────── */
-
-.codeblock {
+.card {
   background: var(--color-background-secondary);
-  border: var(--t-border-width) solid var(--color-separator-secondary);
+  border: var(--t-border-width) solid var(--color-separator);
   border-radius: var(--t-border-radius-xl);
   corner-shape: squircle;
-  font-family: var(--font-mono);
-  line-height: 1.45;
-  padding: var(--t-spacing-3);
-  text-box: normal;
-  white-space: pre;
+  padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
+
+  ul {
+    margin: 0;
+  }
 }
 
-.cm {
-  color: var(--color-foreground-tertiary);
-}
-
-.kw {
-  color: #b4a3f8;
-}
-
-.fn {
-  color: var(--color-warning);
-}
-
-.st {
-  color: var(--color-success);
-}
-
-.br {
-  color: var(--color-primary);
-}
-
+.border-error,
 .card-before {
   border-color: rgba(242, 124, 124, 0.3);
 }
 
+.border-success,
 .card-after {
-  border-color: rgba(114, 179, 244, 0.3);
+  border-color: rgba(107, 203, 119, 0.3);
 }
 
 .card-mono {
@@ -265,34 +242,16 @@ li {
   list-style: none;
 }
 
-/* ── Card row ────────────────────────────────── */
+/* ── Grid ────────────────────────────────────── */
 
-.card-row {
-  display: flex;
-  gap: var(--t-spacing-1-half);
-  width: 100%;
-}
-
-.card-row > .card {
-  flex: 1;
-}
-
-.card-accent {
-  border-color: rgba(180, 163, 248, 0.3);
-}
-
-/* ── Comparison table ────────────────────────── */
-
-.compare {
+.grid {
   display: grid;
-  gap: var(--t-spacing-1-half);
-  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.5rem, calc(0.5rem + 2vw), 1.25rem);
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
 }
 
-.compare .card {
-  gap: var(--t-spacing-3);
-}
+/* ── Metrics ─────────────────────────────────── */
 
 .metric {
   display: flex;
@@ -301,17 +260,13 @@ li {
 }
 
 .metric-value {
-  font-size: clamp(var(--t-font-size-xl), 3vw, var(--t-font-size-3xl));
+  font-size: clamp(
+    var(--t-font-size-xl),
+    calc(1rem + 2vw),
+    var(--t-font-size-3xl)
+  );
   font-weight: var(--t-font-weight-bold);
   letter-spacing: -0.02em;
-}
-
-.metric-label {
-  color: var(--color-foreground-tertiary);
-  font-family: var(--font-mono);
-  font-size: var(--t-font-size-sm);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
 }
 
 .metric-value--error {
@@ -322,17 +277,68 @@ li {
   color: var(--color-success);
 }
 
-.metric-grid {
-  display: grid;
-  gap: var(--t-spacing-3);
-  grid-template-columns: 1fr 1fr;
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: var(--t-font-size-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-/* ── Payoff ───────────────────────────────────── */
+.metric-grid {
+  display: grid;
+  gap: clamp(0.5rem, calc(0.5rem + 2vw), 1.25rem);
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+/* ── Code blocks & syntax ────────────────────── */
+
+.codeblock {
+  background: var(--color-background-secondary);
+  border: var(--t-border-width) solid var(--color-separator-secondary);
+  border-radius: var(--t-border-radius-xl);
+  corner-shape: squircle;
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, calc(0.8rem + 0.5vw), 1.5em);
+  line-height: 1.35;
+  padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
+  text-box: normal;
+  white-space: pre;
+}
+
+.cm {
+  color: var(--color-foreground-tertiary);
+}
+.kw {
+  color: #b4a3f8;
+}
+.fn {
+  color: var(--color-warning);
+}
+.st {
+  color: var(--color-success);
+}
+.br {
+  color: var(--color-primary);
+}
+
+/* ── Tags & inline elements ──────────────────── */
+
+.tag {
+  background: var(--t-fill-color-status-info-ghost);
+  border-radius: var(--t-border-radius-xl);
+  color: var(--color-primary);
+  corner-shape: squircle;
+  display: inline-block;
+  font-family: var(--font-mono);
+  margin-left: var(--t-spacing-1);
+  padding: var(--t-spacing-1);
+}
+
+/* ── Payoff slide ────────────────────────────── */
 
 .big-num {
   color: var(--color-success);
-  font-size: clamp(90px, 18vw, 176px);
+  font-size: clamp(5.625rem, calc(1rem + 17vw), 11rem);
   font-weight: var(--t-font-weight-bold);
   letter-spacing: -0.05em;
 }
@@ -346,11 +352,11 @@ li {
   background: var(--color-background-secondary);
   border: var(--t-border-width) solid var(--color-separator-secondary);
   border-radius: var(--t-border-radius-xl);
-  corner-shape: squircle;
   color: var(--color-primary);
+  corner-shape: squircle;
   font-family: var(--font-mono);
-  font-size: clamp(1rem, 1.8vw, var(--t-font-size-lg));
-  padding: var(--t-spacing-3);
+  font-size: clamp(1rem, calc(0.5rem + 1.3vw), var(--t-font-size-lg));
+  padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
 }
 
 .cmd::before {
@@ -358,15 +364,13 @@ li {
   content: "$ ";
 }
 
-/* ── Headshot ────────────────────────────────── */
+/* ── Intro & contact slides ──────────────────── */
 
 .headshot {
   border-radius: 50%;
   corner-shape: squircle;
   object-fit: cover;
 }
-
-/* ── Contact ─────────────────────────────────── */
 
 .contact {
   align-items: center;
@@ -376,17 +380,20 @@ li {
   margin-top: var(--t-spacing-1);
 }
 
+.contact-text,
+.contact-link {
+  font-family: var(--font-mono);
+}
+
 .contact-text {
   color: var(--color-foreground-secondary);
-  font-family: var(--font-mono);
 }
 
 .contact-link {
   background: var(--t-fill-color-status-info-ghost);
   border-radius: var(--t-border-radius-xl);
-  corner-shape: squircle;
   color: var(--color-primary);
-  font-family: var(--font-mono);
+  corner-shape: squircle;
   padding: var(--t-spacing-1);
 }
 
@@ -395,7 +402,7 @@ li {
 .packaging-slide {
   align-items: center;
   display: grid;
-  gap: var(--t-spacing-5);
+  gap: clamp(1rem, calc(0.5rem + 2vw), 2.5rem);
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   position: relative;
@@ -404,7 +411,7 @@ li {
 .packaging-content {
   display: flex;
   flex-direction: column;
-  gap: var(--t-spacing-4);
+  gap: clamp(1rem, calc(0.5rem + 1.5vw), 2rem);
 }
 
 .browser-chrome {
@@ -441,8 +448,8 @@ li {
   background: var(--color-background);
   border: var(--t-border-width) solid var(--color-separator);
   border-radius: var(--t-border-radius-lg);
-  corner-shape: squircle;
   color: var(--color-foreground-tertiary);
+  corner-shape: squircle;
   font-family: var(--font-mono);
   font-size: var(--t-font-size-sm);
   margin-left: 8px;

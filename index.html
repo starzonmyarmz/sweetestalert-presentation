@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <main class="stage" id="stage">
+    <main id="stage">
       <section class="center">
         <img
           class="headshot"
@@ -23,19 +23,21 @@
           alt="Dan Marino Headshot"
         />
         <h2>Dan Marino</h2>
-        <p class="card-text">UX Engineer • Trust & Safety</p>
+        <p>UX Engineer • Trust & Safety</p>
       </section>
 
       <section class="center">
-        <div class="label">Planning Center</div>
-        <h1>The <em>Sweetest</em> Alert</h1>
+        <div>
+          <div class="label">Planning Center</div>
+          <h1>The <em>Sweetest</em> Alert</h1>
+        </div>
         <h3>A <code>&lt;dialog&gt;</code> Migration Story</h3>
       </section>
 
       <section>
         <div>
           <div class="label">The Problem</div>
-          <h2>SweetAlert has to go.</h2>
+          <h2>Swal2 has to go</h2>
         </div>
         <ul class="prob-list">
           <li>Bloated — includes too much for what we actually need</li>
@@ -49,7 +51,8 @@
             Outdated — it doesn’t lean on modern, highly-supported features
           </li>
           <li>
-            Questionable — Openly promotes NSFW sponsors, Contains “protestware”
+            Questionable ethics — Openly promotes NSFW sponsors, Contains
+            “protestware”
           </li>
         </ul>
       </section>
@@ -59,7 +62,7 @@
           <div class="label">By the Numbers</div>
           <h2>Swal2 vs <em>Sweetest</em> Alert</h2>
         </div>
-        <div class="compare">
+        <div class="grid">
           <div class="card card-before">
             <div class="label label-error">Swal2 in Giving</div>
             <div class="metric-grid">
@@ -109,32 +112,24 @@
       <section>
         <div>
           <div class="label">The Browser’s Gift</div>
-          <h2>The browser has already <em>solved</em> this.</h2>
+          <h2>The browser has already solved this</h2>
         </div>
-        <div class="grid2">
+        <div class="grid">
           <div class="card">
             <div class="label label-primary">Focus trapping</div>
-            <p class="card-text">
-              Built-in — no library or manual event management needed.
-            </p>
+            <p>Built-in — no library or manual event management needed.</p>
           </div>
           <div class="card">
             <div class="label label-primary">Keyboard support</div>
-            <p class="card-text">
-              Escape to close, tab order — all handled natively.
-            </p>
+            <p>Escape to close, tab order — all handled natively.</p>
           </div>
           <div class="card">
             <div class="label label-primary">::backdrop</div>
-            <p class="card-text">
-              Native overlay is baked in — no extra DOM required.
-            </p>
+            <p>Native overlay is baked in — no extra DOM required.</p>
           </div>
           <div class="card">
             <div class="label label-primary">Top-layer promotion</div>
-            <p class="card-text">
-              Dialogs always render above everything. No z-index battles!
-            </p>
+            <p>Dialogs always render above everything. No z-index battles!</p>
           </div>
         </div>
       </section>
@@ -145,17 +140,23 @@
           <h2><em>Sweetest</em> Alert</h2>
         </div>
         <ul class="check-list">
-          <li>Native <code>&lt;dialog&gt;</code> — way less code</li>
+          <li>
+            <strong>Imperative Utility</strong> — built from the ground up
+            using React, utilizing the <code>&lt;dialog&gt;</code> element.
+          </li>
           <li>
             <strong>Built for PCO</strong> — Tapestry tokens, our standards
           </li>
-          <li>Rails support via <strong>Stimulus</strong> + DOMPurify</li>
+          <li>
+            <strong>Rails support</strong> — <strong>Stimulus</strong> +
+            html-react-parser
+          </li>
         </ul>
         <!-- prettier-ignore -->
-        <div class="grid2">
+        <div class="grid">
           <div>
             <div class="label label-error">Before</div>
-            <div class="codeblock"><span class="cm">// Swal2</span>
+            <div class="codeblock card-before"><span class="cm">// Swal2</span>
 <span class="fn">Swal</span>.<span class="kw">fire</span>({
   title: <span class="st">"Archive group?"</span>,
   icon: <span class="st">"warning"</span>,
@@ -167,7 +168,7 @@
 
           <div>
             <div class="label label-success">After</div>
-            <div class="codeblock"><span class="cm">// SweetestAlert</span>
+            <div class="codeblock card-after"><span class="cm">// SweetestAlert</span>
 <span class="fn">SweetestAlert</span>({
   title: <span class="st">"Archive group?"</span>,
   icon: <span class="st">"warning"</span>,
@@ -180,12 +181,12 @@
       <section>
         <div>
           <div class="label">The Strategy</div>
-          <h2>Keep it simple. Ship it early.</h2>
+          <h2>Keep it simple, ship it early</h2>
         </div>
-        <div class="card-row">
+        <div class="grid">
           <div class="card card-before">
             <div class="label label-error">The temptation</div>
-            <ul class="card-text card-mono">
+            <ul class="card-mono">
               <li>Big rewrite</li>
               <li>Migration plan doc</li>
               <li>All or nothing</li>
@@ -193,8 +194,8 @@
           </div>
 
           <div class="card card-after">
-            <div class="label label-primary">Our approach</div>
-            <ul class="card-text card-mono">
+            <div class="label label-success">Our approach</div>
+            <ul class="card-mono">
               <li>Inventory → POC</li>
               <li>2–3 instances at a time</li>
               <li>Expand as we go</li>
@@ -256,7 +257,7 @@
       <section>
         <div>
           <div class="label">Rails Support</div>
-          <h2>Bridging Rails & <em>React</em></h2>
+          <h2>Bridging Rails & React</h2>
         </div>
         <ul class="steps arrow-list">
           <li>
@@ -265,7 +266,7 @@
           </li>
         </ul>
         <!-- prettier-ignore -->
-        <div class="grid2">
+        <div class="grid">
           <div>
             <div class="label label-primary">Stimulus Controller</div>
             <div class="codeblock"><span class="cm">// sweetest_alert_controller.js</span>
@@ -303,32 +304,30 @@
           <div class="label">AI as Dev Partner</div>
           <h2>Dogfooding the tools we reach for.</h2>
         </div>
-        <div class="card-row">
+        <div class="grid">
           <div class="card">
-            <div class="label label-violet">Building</div>
-            <p class="card-text">
-              Claude Code to assist in building the component
-            </p>
+            <div class="label label-primary">Building</div>
+            <p>Claude Code to assist in building the component</p>
           </div>
 
           <div class="card">
-            <div class="label label-violet">Docs &amp; demos</div>
-            <p class="card-text">
+            <div class="label label-primary">Docs &amp; demos</div>
+            <p>
               Claude to generate boilerplate, demos, and docs for the NPM
               package
             </p>
           </div>
 
           <div class="card">
-            <div class="label label-violet">Migration</div>
-            <p class="card-text">
+            <div class="label label-primary">Migration</div>
+            <p>
               AI-assisted scripts to accelerate the migration across Accounts
             </p>
           </div>
 
           <div class="card">
-            <div class="label label-violet">These slides</div>
-            <p class="card-text">Yes, including this deck 😘</p>
+            <div class="label label-primary">These slides</div>
+            <p>Yes, including this deck 😘</p>
           </div>
         </div>
       </section>
