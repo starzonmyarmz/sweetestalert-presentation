@@ -14,7 +14,7 @@
 
   <body>
     <main id="stage">
-      <section class="center">
+      <section class="center" aria-label="Introduction">
         <img
           class="headshot"
           src="./headshot.png"
@@ -27,18 +27,18 @@
       </section>
 
       <section class="center">
-        <div>
-          <div class="label">Planning Center</div>
-          <h1>The <em>Sweetest</em> Alert</h1>
-        </div>
+        <h1>
+          <span class="label">Planning Center</span>
+          The <em>Sweetest</em> Alert
+        </h1>
         <h3>A <code>&lt;dialog&gt;</code> Migration Story</h3>
       </section>
 
       <section>
-        <div>
-          <div class="label">The Problem</div>
-          <h2>Swal2 has to go</h2>
-        </div>
+        <h2>
+          <span class="label">The Problem</span>
+          Swal2 has to go
+        </h2>
         <ul class="prob-list">
           <li>Bloated — includes too much for what we actually need</li>
           <li>
@@ -58,10 +58,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">By the Numbers</div>
-          <h2>Swal2 vs <em>Sweetest</em> Alert</h2>
-        </div>
+        <h2>
+          <span class="label">By the Numbers</span>
+          Swal2 vs <em>Sweetest</em> Alert
+        </h2>
         <div class="grid">
           <div class="card card-before">
             <div class="label label-error">Swal2 in Giving</div>
@@ -110,10 +110,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">The Browser’s Gift</div>
-          <h2>The browser has already solved this</h2>
-        </div>
+        <h2>
+          <span class="label">The Browser’s Gift</span>
+          The browser has already solved this
+        </h2>
         <div class="grid">
           <div class="card">
             <div class="label label-primary">Focus trapping</div>
@@ -135,10 +135,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">What Was Built</div>
-          <h2><em>Sweetest</em> Alert</h2>
-        </div>
+        <h2>
+          <span class="label">What Was Built</span>
+          <em>Sweetest</em> Alert
+        </h2>
         <ul class="check-list">
           <li>
             <strong>Imperative utility</strong> — built from the ground up with
@@ -179,10 +179,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">The Strategy</div>
-          <h2>Keep it simple, ship it early</h2>
-        </div>
+        <h2>
+          <span class="label">The Strategy</span>
+          Keep it simple, ship it early
+        </h2>
         <div class="grid">
           <div class="card card-before">
             <div class="label label-error">The temptation</div>
@@ -205,10 +205,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">How It Happened</div>
-          <h2>The process</h2>
-        </div>
+        <h2>
+          <span class="label">How It Happened</span>
+          The process
+        </h2>
         <ol class="steps">
           <li><strong>Inventory</strong> every Swal2 instance in Accounts</li>
           <li><strong>Compare</strong> against the Figma spec</li>
@@ -225,17 +225,17 @@
       </section>
 
       <section class="packaging-slide">
-        <div>
-          <div class="label">Packaging</div>
-          <h2>Extract, document, & ship</h2>
-        </div>
+        <h2>
+          <span class="label">Packaging</span>
+          Extract, document, & ship
+        </h2>
         <ul class="steps arrow-list">
           <li>Extract to an <strong>NPM package</strong></li>
           <li>Write tests, docs, and a demo</li>
           <li>Switch Accounts over to the new package</li>
         </ul>
 
-        <div class="browser-chrome">
+        <div class="browser-chrome" aria-hidden="true">
           <div class="browser-bar">
             <span class="browser-dot"></span>
             <span class="browser-dot"></span>
@@ -253,10 +253,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">Rails Support</div>
-          <h2>Bridging Rails & React</h2>
-        </div>
+        <h2>
+          <span class="label">Rails Support</span>
+          Bridging Rails & React
+        </h2>
         <!-- prettier-ignore -->
         <div class="grid">
           <div>
@@ -291,10 +291,10 @@
       </section>
 
       <section>
-        <div>
-          <div class="label">AI as Dev Partner</div>
-          <h2>Dogfooding the tools we reach for</h2>
-        </div>
+        <h2>
+          <span class="label">AI as Dev Partner</span>
+          Dogfooding the tools we reach for
+        </h2>
         <div class="grid">
           <div class="card">
             <div class="label label-primary">Building</div>
@@ -322,12 +322,12 @@
 
       <section class="center">
         <div class="label">The Payoff</div>
-        <div class="big-num"></div>
+        <div class="big-num" aria-label="0"></div>
         <p class="big-label">Swal2 instances remaining in Accounts</p>
         <div class="cmd">yarn remove sweetalert2</div>
       </section>
 
-      <section class="center">
+      <section class="center" aria-label="Contact">
         <div class="label">The End</div>
         <h1>Thanks!</h1>
         <div class="contact">
@@ -339,8 +339,8 @@
       </section>
     </main>
 
-    <div class="progress-bar"></div>
-    <div class="slide-counter" id="ctr">1 / 13</div>
+    <div class="progress-bar" aria-hidden="true"></div>
+    <div class="slide-counter" aria-hidden="true" id="ctr">1 / 13</div>
 
     <script type="module" src="./script.js"></script>
   </body>

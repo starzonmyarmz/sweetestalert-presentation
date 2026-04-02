@@ -152,9 +152,15 @@ code {
 .label {
   color: var(--color-foreground-secondary);
   font-family: var(--font-mono);
+  font-size: clamp(1rem, calc(16px + 1vw), 1.5rem);
+  font-weight: normal;
   letter-spacing: 0.05em;
   margin-bottom: clamp(0.25rem, calc(1rem + 0.5vw), 0.75rem);
   text-transform: uppercase;
+}
+
+:is(h1, h2) > .label {
+  display: block;
 }
 
 .label-primary {
@@ -550,4 +556,24 @@ ol {
   right: 24px;
   top: 24px;
   z-index: calc(infinity);
+}
+
+/* ── Reduced motion ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+
+  main {
+    scroll-behavior: auto;
+  }
+
+  .big-num {
+    --countdown: 0;
+  }
 }
