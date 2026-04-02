@@ -76,7 +76,7 @@ section {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  gap: clamp(1rem, calc(1rem + 2vw), 2rem);
+  gap: clamp(1rem, calc(1rem + 4vw), 3rem);
   height: 100dvh;
   justify-content: center;
   overflow: hidden;
@@ -224,16 +224,6 @@ ol {
   }
 }
 
-.border-error,
-.card-before {
-  border-color: rgba(242, 124, 124, 0.3);
-}
-
-.border-success,
-.card-after {
-  border-color: rgba(107, 203, 119, 0.3);
-}
-
 .card-mono {
   display: flex;
   flex-direction: column;
@@ -302,13 +292,10 @@ ol {
 }
 
 .metric-value {
-  font-size: clamp(
-    var(--t-font-size-xl),
-    calc(1rem + 2vw),
-    var(--t-font-size-3xl)
-  );
+  font-size: clamp(1rem, calc(1rem + 2vw), 2rem);
   font-weight: var(--t-font-weight-bold);
   letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .metric-value--error {
@@ -321,14 +308,14 @@ ol {
 
 .metric-label {
   font-family: var(--font-mono);
-  font-size: var(--t-font-size-sm);
+  font-size: clamp(0.5rem, calc(0.5rem + 2vw), 0.75rem);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .metric-grid {
   display: grid;
-  gap: clamp(0.5rem, calc(0.5rem + 2vw), 1.25rem);
+  gap: clamp(0.5rem, calc(0.5rem + 2vw), 1rem);
   grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
 }
 
@@ -363,17 +350,16 @@ ol {
   color: var(--color-primary);
 }
 
-/* ── Tags & inline elements ──────────────────── */
+/* ── Border color overrides ─────────────────── */
 
-.tag {
-  background: var(--t-fill-color-status-info-ghost);
-  border-radius: var(--t-border-radius-xl);
-  color: var(--color-primary);
-  corner-shape: squircle;
-  display: inline-block;
-  font-family: var(--font-mono);
-  margin-left: var(--t-spacing-1);
-  padding: var(--t-spacing-1);
+.border-error,
+.card-before {
+  border-color: rgba(242, 124, 124, 0.3);
+}
+
+.border-success,
+.card-after {
+  border-color: rgba(107, 203, 119, 0.3);
 }
 
 /* ── Payoff slide ────────────────────────────── */
@@ -399,7 +385,7 @@ ol {
   animation-timeline: --stage;
   color: var(--color-success);
   counter-reset: num var(--countdown);
-  font-size: clamp(5.625rem, calc(1rem + 17vw), 11rem);
+  font-size: clamp(5.625rem, calc(1rem + 18vw), 12rem);
   font-weight: var(--t-font-weight-bold);
   letter-spacing: -0.05em;
 }
