@@ -144,7 +144,7 @@ code {
   corner-shape: squircle;
   font-size: 0.9em;
   font-style: normal;
-  padding: var(--t-spacing-1);
+  padding: var(--t-spacing-half) var(--t-spacing-1);
 }
 
 /* ── Labels ──────────────────────────────────── */
@@ -387,7 +387,7 @@ ol {
 
 .big-num {
   animation: countdown steps(64) forwards;
-  animation-range: calc(10 / 12 * 100%) calc(11 / 12 * 100%);
+  animation-range: calc(9 / 11 * 100%) calc(10 / 11 * 100%);
   animation-timeline: --stage;
   color: var(--color-success);
   counter-reset: num var(--countdown);

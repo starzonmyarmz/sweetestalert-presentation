@@ -48,7 +48,8 @@
             Inconsistent UX, versions, and implementations across PCO apps
           </li>
           <li>
-            Outdated — it doesn’t lean on modern, highly-supported features
+            Outdated — ignores native <code>&lt;dialog&gt;</code>, which
+            solves most of this
           </li>
           <li>
             Questionable ethics — openly promotes NSFW sponsors, contains
@@ -64,45 +65,29 @@
         </h2>
         <div class="grid">
           <div class="card card-before">
-            <div class="label label-error">Swal2 in Giving</div>
+            <div class="label label-error">Swal2</div>
             <div class="metric-grid">
               <div class="metric">
-                <span class="metric-value metric-value--error">25 KB</span>
+                <span class="metric-value metric-value--error">~24 KB</span>
                 <span class="metric-label">Over the wire (gzip)</span>
               </div>
               <div class="metric">
-                <span class="metric-value metric-value--error">99 KB</span>
-                <span class="metric-label">Raw payload</span>
-              </div>
-              <div class="metric">
-                <span class="metric-value metric-value--error">2</span>
-                <span class="metric-label">NPM packages</span>
-              </div>
-              <div class="metric">
-                <span class="metric-value metric-value--error">141</span>
-                <span class="metric-label">Lines of CSS overrides</span>
+                <span class="metric-value metric-value--error">1,378</span>
+                <span class="metric-label">Lines of CSS</span>
               </div>
             </div>
           </div>
 
           <div class="card card-after">
-            <div class="label label-success">Sweetest Alert in Accounts</div>
+            <div class="label label-success">Sweetest Alert</div>
             <div class="metric-grid">
               <div class="metric">
-                <span class="metric-value metric-value--success">2.3 KB</span>
+                <span class="metric-value metric-value--success">~3 KB</span>
                 <span class="metric-label">Over the wire (gzip)</span>
               </div>
               <div class="metric">
-                <span class="metric-value metric-value--success">6 KB</span>
-                <span class="metric-label">Raw payload</span>
-              </div>
-              <div class="metric">
-                <span class="metric-value metric-value--success">1</span>
-                <span class="metric-label">NPM package</span>
-              </div>
-              <div class="metric">
-                <span class="metric-value metric-value--success">0</span>
-                <span class="metric-label">Lines of CSS overrides</span>
+                <span class="metric-value metric-value--success">64</span>
+                <span class="metric-label">Lines of CSS</span>
               </div>
             </div>
           </div>
@@ -112,7 +97,7 @@
       <section>
         <h2>
           <span class="label">The Browser’s Gift</span>
-          The browser has already solved this
+          <code>&lt;dialog&gt;</code> gives you all of this for free
         </h2>
         <div class="grid">
           <div class="card">
@@ -147,10 +132,6 @@
           <li>
             <strong>Built for PCO</strong> — Tapestry tokens, our standards
           </li>
-          <li>
-            <strong>Rails support</strong> — <code>stimulus</code> +
-            <code>html-react-parser</code>
-          </li>
         </ul>
         <!-- prettier-ignore -->
         <div class="grid">
@@ -161,7 +142,6 @@
   title: <span class="st">"Archive group?"</span>,
   icon: <span class="st">"warning"</span>,
   showCancelButton: <span class="br">true</span>,
-  confirmButtonColor: <span class="st">"#3085d6"</span>,
   confirmButtonText: <span class="st">"Archive"</span>,
 })</div>
           </div>
@@ -171,8 +151,8 @@
             <div class="codeblock card-after"><span class="cm">// SweetestAlert</span>
 <span class="fn">SweetestAlert</span>({
   title: <span class="st">"Archive group?"</span>,
-  type: <span class="st">"warning"</span>,
-  confirmButtonText: <span class="st">"Archive"</span>,
+  confirmButton: <span class="st">"Archive"</span>,
+  <span class="kw">onConfirm</span>: () => <span class="fn">archiveGroup</span>(id),
 })</div>
           </div>
         </div>
@@ -194,34 +174,15 @@
           </div>
 
           <div class="card card-after">
-            <div class="label label-success">Our approach</div>
-            <ul class="card-mono">
-              <li>Inventory → Proof of concept</li>
-              <li>2–3 instances at a time</li>
-              <li>Expand as we go</li>
-            </ul>
+            <div class="label label-success">What we actually did</div>
+            <ol class="card-mono steps">
+              <li><strong>Inventory</strong> every instance</li>
+              <li><strong>Proof of concept</strong> in a low-traffic area</li>
+              <li><strong>Convert 2–3 at a time</strong>, growing in complexity</li>
+              <li><strong>Expand features</strong> as each wave reveals needs</li>
+            </ol>
           </div>
         </div>
-      </section>
-
-      <section>
-        <h2>
-          <span class="label">How It Happened</span>
-          The process
-        </h2>
-        <ol class="steps">
-          <li><strong>Inventory</strong> every Swal2 instance in Accounts</li>
-          <li><strong>Compare</strong> against the Figma spec</li>
-          <li><strong>Proof of concept</strong> in one low-traffic area</li>
-          <li>
-            <strong>Convert a handful at a time</strong>, growing in visibility
-            and complexity
-          </li>
-          <li>
-            <strong>Expand features</strong> and tests as each wave reveals new
-            needs
-          </li>
-        </ol>
       </section>
 
       <section class="packaging-slide">
@@ -314,8 +275,8 @@
           </div>
 
           <div class="card">
-            <div class="label label-primary">These slides</div>
-            <p>Yes, including this deck 😘</p>
+            <div class="label label-primary">Code review &amp; tests</div>
+            <p>AI-assisted test scaffolding and review across conversions</p>
           </div>
         </div>
       </section>
@@ -340,7 +301,7 @@
     </main>
 
     <div class="progress-bar" aria-hidden="true"></div>
-    <div class="slide-counter" aria-hidden="true" id="ctr">1 / 13</div>
+    <div class="slide-counter" aria-hidden="true" id="ctr">1 / 12</div>
 
     <script type="module" src="./script.js"></script>
   </body>
