@@ -114,7 +114,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(3rem, calc(1rem + 6vw), 6rem);
+  font-size: clamp(3rem, calc(1rem + 5.5vw), 5.5rem);
 }
 
 h3 {
@@ -212,7 +212,11 @@ ol {
   font-family: var(--font-mono);
 }
 
-.arrow-list {
+.arrow-right-list {
+  list-style: "→ ";
+}
+
+.arrow-up-list {
   list-style: "↑ ";
 }
 
@@ -224,18 +228,6 @@ ol {
   border-radius: var(--t-border-radius-xl);
   corner-shape: squircle;
   padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
-
-  ul {
-    margin: 0;
-  }
-}
-
-.card-mono {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-mono);
-  gap: var(--t-spacing-1);
-  list-style: none;
 }
 
 /* ── Grid ────────────────────────────────────── */
@@ -454,7 +446,7 @@ ol {
   padding: var(--t-spacing-1);
 }
 
-/* ── Packaging slide (browser bleed) ─────────── */
+/* ── Packaging slide ─────────── */
 
 .packaging-slide {
   overflow: clip;
