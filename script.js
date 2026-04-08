@@ -27,14 +27,14 @@ const observer = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        const index = [...sections].indexOf(entry.target)
-        ctr.textContent = `${index + 1} / ${total}`
+        ctr.textContent = `${Number(entry.target.dataset.slide) + 1} / ${total}`
       }
     }
   },
   { root: stage, threshold: 0.5 },
 )
 
-for (const section of sections) {
+sections.forEach((section, i) => {
+  section.dataset.slide = i
   observer.observe(section)
-}
+})

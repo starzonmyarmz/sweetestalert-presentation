@@ -159,10 +159,6 @@ code {
   text-transform: uppercase;
 }
 
-:is(h1, h2) > .label {
-  display: block;
-}
-
 .label-primary {
   color: var(--color-primary);
 }
@@ -183,10 +179,6 @@ ol {
   flex-direction: column;
   gap: var(--t-spacing-2);
   margin-left: 2ch;
-}
-
-ol {
-  margin-left: 3ch;
 }
 
 .prob-list {
@@ -325,7 +317,7 @@ ol {
   border-radius: var(--t-border-radius-xl);
   corner-shape: squircle;
   font-family: var(--font-mono);
-  font-size: clamp(0.8rem, calc(0.8rem + 0.5vw), 0.8em);
+  font-size: 0.8rem;
   line-height: 1.35;
   padding: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
   text-box: normal;
@@ -350,12 +342,10 @@ ol {
 
 /* ── Border color overrides ─────────────────── */
 
-.border-error,
 .card-before {
   border-color: rgba(242, 124, 124, 0.3);
 }
 
-.border-success,
 .card-after {
   border-color: rgba(107, 203, 119, 0.3);
 }
@@ -512,6 +502,7 @@ ol {
 
 .browser-screenshot {
   display: block;
+  height: auto;
   width: 100%;
 }
 
