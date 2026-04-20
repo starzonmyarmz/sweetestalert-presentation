@@ -4,22 +4,28 @@ const stage = document.getElementById("stage")
 const ctr = document.getElementById("ctr")
 const sections = stage.querySelectorAll("section")
 const total = sections.length
+const channel = new BroadcastChannel("sweetest-alert-deck")
 
 function currentSlide() {
   return Math.round(stage.scrollTop / stage.clientHeight)
 }
 
+function goTo(index) {
+  const clamped = Math.max(0, Math.min(total - 1, index))
+  stage.scrollTo({ top: clamped * stage.clientHeight, behavior: "smooth" })
+}
+
 document.addEventListener("keydown", (e) => {
   if (["ArrowDown", "ArrowRight", " "].includes(e.key)) {
     e.preventDefault()
-    const next = Math.min(currentSlide() + 1, total - 1)
-    stage.scrollTo({ top: next * stage.clientHeight, behavior: "smooth" })
-  }
-
-  if (["ArrowUp", "ArrowLeft"].includes(e.key)) {
+    goTo(currentSlide() + 1)
+  } else if (["ArrowUp", "ArrowLeft"].includes(e.key)) {
     e.preventDefault()
-    const prev = Math.max(currentSlide() - 1, 0)
-    stage.scrollTo({ top: prev * stage.clientHeight, behavior: "smooth" })
+    goTo(currentSlide() - 1)
+  } else if (e.key === "p" || e.key === "P") {
+    e.preventDefault()
+    const url = new URL("presenter.html", window.location.href).toString()
+    window.open(url, "sweetest-alert-presenter", "popup,width=1200,height=800")
   }
 })
 
@@ -27,7 +33,9 @@ const observer = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        ctr.textContent = `${Number(entry.target.dataset.slide) + 1} / ${total}`
+        const index = Number(entry.target.dataset.slide)
+        ctr.textContent = `${index + 1} / ${total}`
+        channel.postMessage({ type: "slide", index })
       }
     }
   },
@@ -38,3 +46,15 @@ sections.forEach((section, i) => {
   section.dataset.slide = i
   observer.observe(section)
 })
+
+channel.addEventListener("message", (e) => {
+  const { type, direction } = e.data ?? {}
+  if (type === "nav") {
+    if (direction === "next") goTo(currentSlide() + 1)
+    else if (direction === "prev") goTo(currentSlide() - 1)
+  } else if (type === "request-slide") {
+    channel.postMessage({ type: "slide", index: currentSlide() })
+  }
+})
+
+channel.postMessage({ type: "slide", index: currentSlide() })

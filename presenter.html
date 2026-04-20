@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-color-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗒️</text></svg>"
+    />
+    <title>Presenter — Sweetest Alert</title>
+  </head>
+
+  <body>
+    <header id="counter">— / —</header>
+
+    <main class="grid">
+      <section class="current">
+        <div class="title-row">
+          <h1 id="title">—</h1>
+          <span id="time" class="time" hidden></span>
+        </div>
+        <div id="notes">
+          <p class="aside">
+            Waiting for deck… open the main window or press → to advance.
+          </p>
+        </div>
+      </section>
+
+      <aside class="next">
+        <div class="label">Next up</div>
+        <div id="next">—</div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>← / → navigate</span>
+      <span>Connected to <code>sweetest-alert-deck</code></span>
+    </footer>
+
+    <script type="module" src="./presenter.js"></script>
+  </body>
+</html>

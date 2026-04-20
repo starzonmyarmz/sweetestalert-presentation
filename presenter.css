@@ -1,0 +1,115 @@
+@import "@planningcenter/tapestry/tokens.css";
+
+:root {
+  --color-background: var(--t-surface-color-canvas);
+  --color-foreground: var(--t-text-color-headline);
+  --color-foreground-secondary: var(--t-text-color-secondary);
+  --color-foreground-tertiary: var(--t-text-color-disabled);
+  --color-separator: var(--t-border-color);
+  --font-mono: var(--t-font-monospace);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html,
+body {
+  height: 100dvh;
+}
+
+body {
+  display: grid;
+  font-size: 1.5rem;
+  gap: 2rem;
+  grid-template-rows: auto 1fr auto;
+  margin: 0;
+  padding: 2rem;
+  text-wrap: pretty;
+}
+
+header,
+footer {
+  align-items: center;
+  color: var(--color-foreground-tertiary);
+  display: flex;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+footer span {
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 3fr 1fr;
+
+  @media (width < 800px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+.current,
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.title-row {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#title {
+  color: var(--color-foreground);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+#notes {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    line-height: 1.4;
+  }
+}
+
+.next {
+  border-left: var(--t-border-width) solid var(--color-separator);
+  padding-left: 2rem;
+
+  @media (width < 800px) {
+    border-left: none;
+    border-top: var(--t-border-width) solid var(--color-separator);
+    padding-left: 0;
+    padding-top: 1rem;
+  }
+}
+
+#next {
+  color: var(--color-foreground-secondary);
+  line-height: 1.2;
+}
