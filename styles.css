@@ -398,6 +398,12 @@ ol {
   object-fit: cover;
 }
 
+@media (width < 600px) {
+  .qr {
+    display: none;
+  }
+}
+
 .contact {
   align-items: center;
   display: flex;
