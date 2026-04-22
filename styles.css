@@ -532,9 +532,14 @@ ol {
 
 /* ── Slide counter ───────────────────────────── */
 
+.slide-counter {
+  display: none;
+}
+
 @media (width > 599px) {
   .slide-counter {
     color: var(--color-foreground-tertiary);
+    display: block;
     font-family: var(--font-mono);
     position: fixed;
     right: 24px;
